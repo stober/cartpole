@@ -1,0 +1,12 @@
+Cartpole Simulation in Python
+
+Author: Jeremy Stober
+Contact: stober@gmail.com
+Version: 0.01
+
+This is a Python implementation that is numerically as close as
+possible to the publicly available cart pole simulation found here:
+http://webdocs.cs.ualberta.ca/~sutton/book/code/pole.c.
+
+This is a useful simple continuous control problem for testing RL
+algorithms.
