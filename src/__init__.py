@@ -60,7 +60,7 @@ class CartPole(object):
         six_degrees = 0.1047192
         twelve_degrees = 0.2094384
         fifty_degrees = 0.87266
-        
+
         if (not -2.4 < self.x < 2.4) or (not -twelve_degrees < self.theta < twelve_degrees):
             return -1
 
@@ -108,7 +108,7 @@ class CartPole(object):
         else:
             return 0.0
 
-    def move(self, action): # binary L/R action
+    def move(self, action, boxed=False): # binary L/R action
         force = 0.0
         if action > 0:
             force = self.force_mag
@@ -124,14 +124,17 @@ class CartPole(object):
 
         (px,pxdot,ptheta,pthetadot) = (self.x, self.xdot, self.theta, self.thetadot)
         pstate = self.state()
-        
+
         self.x += self.tau * self.xdot
         self.xdot += self.tau * xacc
         self.theta += self.tau * self.thetadot
         self.thetadot += self.tau * thetaacc
 
-        return [px,pxdot,ptheta,pthetadot],action,self.reward(),[self.x,self.xdot, self.theta, self.thetadot]
-    
+        if boxed:
+            return pstate, action, self.reward(), self.state()
+        else:
+            return [px,pxdot,ptheta,pthetadot],action,self.reward(),[self.x,self.xdot, self.theta, self.thetadot]
+
 if __name__ == '__main__':
 
     cp = CartPole()
@@ -146,7 +149,7 @@ if __name__ == '__main__':
             return 1
         else:
             return 0
-        
+
 
     if False:
         for i in range(100):
